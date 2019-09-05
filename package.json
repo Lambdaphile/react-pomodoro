@@ -1,0 +1,47 @@
+{
+  "name": "react-pomodoro",
+  "version": "0.1.0",
+  "description": "Pomodoro app with React",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genesis-algorithms/react-pomodoro.git"
+  },
+  "author": "Genesis Algorithms",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/genesis-algorithms/react-pomodoro/issues"
+  },
+  "homepage": "https://github.com/genesis-algorithms/react-pomodoro#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-hot-loader": "^4.12.12",
+    "semantic-ui-react": "^0.88.0",
+    "styled-components": "^4.3.2"
+  }
+}
