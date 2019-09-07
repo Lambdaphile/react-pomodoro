@@ -1,70 +1,75 @@
 import React from 'react';
 import styled from 'styled-components';
-import Controls from './Controls';
+import TimerControls from './Controls';
 
-const StyledTimer = styled.div`
+const Timer = styled.div`
   height: 100px;
   width: 200px;
   background-color: yellow;
   font-size: 34px;
 `;
 
-export default class Timer extends React.Component {
+export default class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      seconds: 1500,
+      workSeconds: 1500,
+      breakSeconds: 300,
+      state: 'idle',
     };
   }
 
-  componentDidMount() {
-    this.time = setInterval(
-      () => this.countDown(),
-      1000,
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.time);
-  }
-
   handleStart = () => {
-    this.componentDidMount();
-  }
-
-  handleStop = () => {
-    this.componentWillUnmount();
-    this.setState({ seconds: 1500 });
+    this.workTimer = setInterval(() => this.countDown(), 1000);
+    this.setState({ state: 'start' });
   }
 
   countDown = () => {
-    this.setState((prevState) => ({ seconds: prevState.seconds - 1 }));
+    this.setState((prevState) => ({ workSeconds: prevState.workSeconds - 1 }));
   }
 
-  convertToMinutes = () => {
-    const { seconds } = this.state;
+  handleStop = () => {
+    clearInterval(this.workTimer);
+    this.setState({ workSeconds: 1500, state: 'idle' });
+  }
 
-    const timerMinutes = Math.floor(seconds / 60);
-    let timerSeconds = Math.floor(seconds - (timerMinutes * 60));
-    if (timerSeconds === 0) timerSeconds = '00';
+  handlePause = () => {
+    this.setState((prevState) => ({ workSeconds: prevState.workSeconds, state: 'paused' }));
+    clearInterval(this.workTimer);
+  }
 
-    return { minutes: timerMinutes, seconds: timerSeconds };
+  handleDone = () => {
+  }
+
+  convertToPomodoro = () => {
+    const { workSeconds } = this.state;
+    const pomodoroMinutes = Math.floor(workSeconds / 60);
+    const pomodoroSeconds = Math.floor(workSeconds - (pomodoroMinutes * 60));
+
+    return { minutes: pomodoroMinutes, seconds: pomodoroSeconds };
   }
 
   render() {
-    const timer = this.convertToMinutes();
-    const display = `${timer.minutes} : ${timer.seconds}`;
+    const { state } = this.state;
+    const pomodoro = this.convertToPomodoro();
+    let displayPomodoroTime = `${pomodoro.minutes} : ${pomodoro.seconds}`;
+
+    if (pomodoro.minutes < 10
+        && pomodoro.seconds < 10) displayPomodoroTime = `0${pomodoro.minutes} : 0${pomodoro.seconds}`;
+    if (pomodoro.minutes < 10) displayPomodoroTime = `0${pomodoro.minutes} : ${pomodoro.seconds}`;
+    if (pomodoro.seconds < 10) displayPomodoroTime = `${pomodoro.minutes} : 0${pomodoro.seconds}`;
 
     return (
-      <fragment>
-        <StyledTimer>
-          {display}
-        </StyledTimer>
-        <Controls
+      <>
+        <Timer>{displayPomodoroTime}</Timer>
+        <TimerControls
+          state={state}
           handleStart={this.handleStart}
+          handlePause={this.handlePause}
           handleStop={this.handleStop}
+          handleDone={this.handleDone}
         />
-      </fragment>
+      </>
     );
   }
 }
