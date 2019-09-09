@@ -3,84 +3,176 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
 
-const Controls = styled.div`
+const Container = styled.div`
   margin-top: 100px;
-  text-align: center;
 `;
 
-const PomodoroControls = ({
-  state, handleStart, handlePause, handleStop, handleDone,
+const Controls = ({
+  handleStart, handlePause, handleStop, handleSkip, timerState
 }) => {
-  if (state === 'start') {
+  if (timerState === 'running') {
     return (
-      <Controls>
+      <Container>
         <Button
           inverted
-          color="orange"
+          size="large"
+          color="white"
           onClick={handlePause}
         >
           Pause
         </Button>
         <Button
           inverted
-          color="orange"
+          size="large"
+          color="white"
           onClick={handleStop}
         >
           Stop
         </Button>
-      </Controls>
+        <Button
+          inverted
+          size="large"
+          color="white"
+          onClick={handleSkip}
+        >
+          Skip
+        </Button>
+      </Container>
     );
   }
 
-  if (state === 'paused') {
+  if (timerState === 'paused') {
     return (
-      <Controls>
+      <Container>
         <Button
           inverted
-          color="orange"
+          size="large"
+          color="white"
           onClick={handleStart}
         >
           Resume
         </Button>
         <Button
           inverted
-          color="orange"
-          onClick={handleDone}
-        >
-          Done
-        </Button>
-      </Controls>
-    );
-  }
-
-  if (state === 'idle') {
-    return (
-      <Controls>
-        <Button
-          inverted
-          color="orange"
-          onClick={handleStart}
-        >
-          Start
-        </Button>
-        <Button
-          inverted
-          color="orange"
+          size="large"
+          color="white"
           onClick={handleStop}
         >
           Stop
         </Button>
-      </Controls>
+        <Button
+          inverted
+          size="large"
+          color="white"
+          onClick={handleSkip}
+        >
+          Skip
+        </Button>
+      </Container>
     );
   }
+
+  return (
+    <Container>
+      <Button
+        inverted
+        size="large"
+        color="white"
+        onClick={handleStart}
+      >
+        Start
+      </Button>
+      <Button
+        inverted
+        size="large"
+        color="white"
+        onClick={handleStop}
+      >
+        Stop
+      </Button>
+      <Button
+        inverted
+        size="large"
+        color="white"
+        onClick={handleSkip}
+      >
+        Skip
+      </Button>
+    </Container>
+  );
 };
 
-PomodoroControls.propTypes = {
-  state: PropTypes.string.isRequired,
+Controls.propTypes = {
+  timerState: PropTypes.string.isRequired,
   handleStart: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
   handleStop: PropTypes.func.isRequired,
-  handleDone: PropTypes.func.isRequired,
+  handleSkip: PropTypes.func.isRequired,
 };
 
-export default PomodoroControls;
+export default Controls;
+
+// if (state === 'start') {
+//   return (
+//     <Controls>
+//       <Button
+//         inverted
+//         color="white"
+//         onClick={handlePause}
+//       >
+//         Pause
+//       </Button>
+//       <Button
+//         inverted
+//         color="white"
+//         onClick={handleStop}
+//       >
+//         Stop
+//       </Button>
+//     </Controls>
+//   );
+// }
+
+// if (state === 'paused') {
+//   return (
+//     <Controls>
+//       <Button
+//         inverted
+//         color="orange"
+//         onClick={handleStart}
+//       >
+//         Resume
+//       </Button>
+//       <Button
+//         inverted
+//         color="orange"
+//         onClick={handleDone}
+//       >
+//         Done
+//       </Button>
+//     </Controls>
+//   );
+// }
+
+// if (state === 'idle') {
+//   return (
+//     <Controls>
+//       <Button
+//         inverted
+//         size="large"
+//         color="white"
+//         onClick={handleStart}
+//       >
+//         Start
+//       </Button>
+//       <Button
+//         inverted
+//         size="large"
+//         color="white"
+//         onClick={handleStop}
+//       >
+//         Stop
+//       </Button>
+//     </Controls>
+//   );
+// }

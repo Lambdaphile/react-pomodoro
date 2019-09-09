@@ -1,75 +1,117 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import TimerControls from './Controls';
+import Controls from './Controls';
 
-const Timer = styled.div`
-  height: 100px;
-  width: 200px;
-  background-color: yellow;
-  font-size: 34px;
+const Display = styled.div`
+  font-size: 64px;
+  color: white;
 `;
 
-export default class Pomodoro extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      workSeconds: 1500,
-      breakSeconds: 300,
-      state: 'idle',
-    };
-  }
+const Timer = () => {
+  let [time, setTime] = useState(1500);
+  const [state, setState] = useState('stopped');
 
-  handleStart = () => {
-    this.workTimer = setInterval(() => this.countDown(), 1000);
-    this.setState({ state: 'start' });
-  }
+  const countDown = () => {
+    setTime(time - 1);
+    console.log(time);
+  };
 
-  countDown = () => {
-    this.setState((prevState) => ({ workSeconds: prevState.workSeconds - 1 }));
-  }
+  let timerr;
+  const handleStart = () => {
+    timerr = setInterval(() => countDown(), 1000);
+    setState('running');
+  };
 
-  handleStop = () => {
-    clearInterval(this.workTimer);
-    this.setState({ workSeconds: 1500, state: 'idle' });
-  }
+  const handleStop = () => {
+    clearInterval(timerr);
+  };
 
-  handlePause = () => {
-    this.setState((prevState) => ({ workSeconds: prevState.workSeconds, state: 'paused' }));
-    clearInterval(this.workTimer);
-  }
+  const handlePause = () => {
+    clearInterval(timerr);
+    setState('stopped');
+  };
 
-  handleDone = () => {
-  }
+  const handleSkip = () => {
+  };
 
-  convertToPomodoro = () => {
-    const { workSeconds } = this.state;
-    const pomodoroMinutes = Math.floor(workSeconds / 60);
-    const pomodoroSeconds = Math.floor(workSeconds - (pomodoroMinutes * 60));
+  const getTimeLeft = () => {
+    const timed = time;
+    const minutesLeft = Math.floor(timed / 60);
+    const secondsLeft = Math.floor(timed - (minutesLeft * 60));
 
-    return { minutes: pomodoroMinutes, seconds: pomodoroSeconds };
-  }
+    // Stop premature optimizations, do them after your code finished
+    let formattedTime = `${minutesLeft} : ${secondsLeft}`;
+    if (secondsLeft < 10) formattedTime = `${minutesLeft} : 0${secondsLeft}`;
+    if (minutesLeft < 10) formattedTime = `0${minutesLeft} : ${secondsLeft}`;
+    if (minutesLeft < 10
+      && secondsLeft < 10) formattedTime = `0${minutesLeft} : 0${secondsLeft}`;
 
-  render() {
-    const { state } = this.state;
-    const pomodoro = this.convertToPomodoro();
-    let displayPomodoroTime = `${pomodoro.minutes} : ${pomodoro.seconds}`;
+    return formattedTime;
+  };
 
-    if (pomodoro.minutes < 10
-        && pomodoro.seconds < 10) displayPomodoroTime = `0${pomodoro.minutes} : 0${pomodoro.seconds}`;
-    if (pomodoro.minutes < 10) displayPomodoroTime = `0${pomodoro.minutes} : ${pomodoro.seconds}`;
-    if (pomodoro.seconds < 10) displayPomodoroTime = `${pomodoro.minutes} : 0${pomodoro.seconds}`;
+  const timeLeft = getTimeLeft();
 
-    return (
-      <>
-        <Timer>{displayPomodoroTime}</Timer>
-        <TimerControls
-          state={state}
-          handleStart={this.handleStart}
-          handlePause={this.handlePause}
-          handleStop={this.handleStop}
-          handleDone={this.handleDone}
-        />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Display>{timeLeft}</Display>
+      <Controls
+        timerState={state}
+        handleStart={handleStart}
+        handlePause={handlePause}
+        handleSkip={handleSkip}
+        handleStop={handleStop}
+      />
+    </>
+  );
+};
+
+export default Timer;
+
+// export default class Timer extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       workSeconds: 1500,
+//       breakSeconds: 300,
+//     };
+//   }
+
+//   handleStart = () => {
+//     this.timer = setInterval(() => this.countDown(), 1000);
+//     this.setState({ state: 'start' });
+//   }
+
+//   countDown = () => {
+//     this.setState((prevState) => ({ workSeconds: prevState.workSeconds - 1 }));
+//   }
+
+//   handleStop = () => {
+//     clearInterval(this.workTimer);
+//     this.setState({ workSeconds: 1500, state: 'idle' });
+//   }
+
+//   handlePause = () => {
+//     this.setState((prevState) => ({ workSeconds: prevState.workSeconds, state: 'paused' }));
+//     clearInterval(this.workTimer);
+//   }
+
+//   handleSkip = () => {
+//   }
+
+
+//   render() {
+
+//     return (
+//       <>
+//         <Display>{displayPomodoroTime}</Display>
+//         <TimerControls
+//           state={state}
+//           handleStart={this.handleStart}
+//           handlePause={this.handlePause}
+//           handleStop={this.handleStop}
+//           handleDone={this.handleDone}
+//         />
+//       </>
+//     );
+//   }
+// }
