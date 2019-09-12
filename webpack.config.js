@@ -2,15 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.jsx',
   mode: 'development',
+  entry: './src/index.jsx',
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
-        options: { presets: ['@babel/env'] },
+        include: path.resolve(__dirname, 'src'),
+        exclude: /(node_modules|bower_components)/,
+        options: {
+          presets: ['@babel/env'],
+        },
       },
       {
         test: /\.css$/,
@@ -26,17 +29,23 @@ module.exports = {
       },
     ],
   },
-  resolve: { extensions: ['*', '.js', '.jsx'] },
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'public/'),
+    port: 3000,
+    publicPath: 'https://localhost:3000/dist/',
+    hot: true,
+  },
   output: {
     path: path.resolve(__dirname, 'dist/'),
     publicPath: 'dist/',
     filename: 'bundle.js',
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'public/'),
-    port: 3000,
-    publicPath: 'https://localhost:3000/dist/',
-    hotOnly: true,
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 };
