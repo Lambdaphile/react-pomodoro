@@ -1,53 +1,56 @@
 import { hot } from 'react-hot-loader/root';
-import React, { useState, useEffect, useRef } from 'react';
-
-const useInterval = (callback, delay, state) => {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    const tick = () => savedCallback.current();
-    let id;
-    if (delay !== null && state !== 'stopped' && state !== 'paused') {
-      id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-    return () => clearInterval(id);
-  }, [delay, state]);
-};
+import React, { useState } from 'react';
+import useInterval from '../hooks/Timer';
 
 const App = () => {
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(1);
   const [timerState, setTimerState] = useState('stopped');
+  const [pomodoroState, setPomodoroState] = useState(1);
+  const [totalSessions, setTotalSession] = useState(8);
 
   useInterval(() => {
-    setSeconds(seconds + 1);
+    if (seconds === 0) {
+      handleSkip();
+    } else {
+      setSeconds(seconds - 1);
+    }
   }, 1000, timerState);
-
 
   const handleStop = () => {
     setTimerState('stopped');
-    setSeconds(0);
+    setPomodoroState(1);
+    setSeconds(1500);
+  };
+
+  const handleSkip = () => {
+    if (pomodoroState % 2 !== 0) {
+      setSeconds(3);
+    } else if (pomodoroState === totalSessions) {
+      setSeconds(1200);
+    } else {
+      setSeconds(1);
+      setTimerState('stopped');
+    }
+    setPomodoroState(pomodoroState + 1);
   };
 
   let firstButton;
   if (timerState === 'stopped') firstButton = 'Start';
   if (timerState === 'running') firstButton = 'Pause';
-  if (timerState === 'stopped' && seconds !== 0) firstButton = 'Resume';
+  if (timerState === 'paused') firstButton = 'Resume';
+
+  const minutesLeft = Math.floor(seconds / 60);
+  const secondsLeft = Math.floor(seconds - (minutesLeft * 60));
+  const timeLeft = `${minutesLeft} : ${secondsLeft}`;
 
   return (
     <>
       <h1>Hello Mother Fucker</h1>
-      {seconds}
+      {timeLeft}
       <button
         type="submit"
-        onClick={(timerState === 'stopped')
-          ? () => setTimerState('running') : () => setTimerState('stopped')}
+        onClick={(timerState === 'stopped' || timerState === 'paused')
+          ? () => setTimerState('running') : () => setTimerState('paused')}
       >
         {firstButton}
       </button>
@@ -58,7 +61,9 @@ const App = () => {
         Stop
       </button>
       <button
+        style={pomodoroState === 1 && timerState === 'stopped' ? { display: 'none' } : { display: 'inline-block' }}
         type="submit"
+        onClick={handleSkip}
       >
         Skip
       </button>
