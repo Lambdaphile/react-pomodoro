@@ -5,9 +5,10 @@ module.exports = {
     es6: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
+    'eslint:recommended',
+    'plugin:react/recommended',
     'airbnb',
+    'prettier',
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,12 +21,10 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    'react-hooks'
-  ],
+  plugins: ['react', 'react-hooks', 'prettier'],
   rules: {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'prettier/prettier': ['error'],
   },
 };
