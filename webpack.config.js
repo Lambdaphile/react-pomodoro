@@ -22,9 +22,6 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         loader: 'file-loader',
-        options: {
-          name: '[./public][background].[jpg]',
-        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
