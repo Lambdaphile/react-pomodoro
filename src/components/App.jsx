@@ -2,15 +2,41 @@ import { hot } from 'react-hot-loader/root';
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
-import { Button } from 'semantic-ui-react';
+import { Container, Grid, Button } from 'semantic-ui-react';
 
 import useInterval from '../hooks/useInterval';
 import Settings from './Settings';
 
-const Display = styled.div`
-  margin: 100px auto;
-  text-align: center;
+const Timer = styled.section`
+  color: white;
+  margin: 0;
 `;
+
+const Display = styled.div`
+  /* SMARTPHONES PORTRAIT */
+  @media only screen and (min-width: 300px) {
+    font-size: 80px;
+  }
+
+  /* SMARTPHONES LANDSCAPE */
+  @media only screen and (min-width: 480px) {
+    font-size: 100px;
+  }
+
+  /* TABLETS PORTRAIT */
+  @media only screen and (min-width: 768px) {
+    font-size: 150px;
+  }
+
+  /* TABLET LANDSCAPE / DESKTOP */
+  @media only screen and (min-width: 1024px) {
+    font-size: 200px;
+  }
+  height: 400px;
+  padding-top: 200px;
+`;
+
+const Controls = styled.div``;
 
 const formatToMMSS = seconds => {
   // Calculate current minutes and seconds...
@@ -113,6 +139,10 @@ const App = () => {
         localStorage.setItem(value[0], value[1]);
       }
     }
+
+    setSeconds(localStorage.getItem('workDuration'));
+    setSessionCounter(1);
+    setTimerState('stopped');
   };
 
   useInterval(
@@ -128,40 +158,67 @@ const App = () => {
   const buttonText = getButtonText(timerState);
   return (
     <>
-      <Display>{timeLeft}</Display>
-      <Button
-        inverted
-        color="purple"
-        onClick={
-          timerState === 'stopped' || timerState === 'paused'
-            ? () => setTimerState('running')
-            : () => setTimerState('paused')
-        }
-      >
-        {buttonText}
-      </Button>
-      <Button inverted color="blue" onClick={handleStop}>
-        Stop
-      </Button>
-      <Button
-        inverted
-        color="orange"
-        style={
-          sessionCounter === 1 && timerState === 'stopped'
-            ? { display: 'none' }
-            : { display: 'inline-block' }
-        }
-        onClick={handleSkip}
-      >
-        Skip
-      </Button>
+      <Container fluid textAlign="center">
+        <Timer>
+          <Display>{timeLeft}</Display>
+          <Controls>
+            <Grid centered stackable>
+              <Grid.Column width="2">
+                <Button
+                  color="grey"
+                  size="huge"
+                  inverted
+                  circular
+                  fluid
+                  onClick={
+                    timerState === 'stopped' ||
+                    timerState === 'paused'
+                      ? () => setTimerState('running')
+                      : () => setTimerState('paused')
+                  }
+                >
+                  {buttonText}
+                </Button>
+              </Grid.Column>
+              <Grid.Column width="2">
+                <Button
+                  color="grey"
+                  size="huge"
+                  inverted
+                  circular
+                  fluid
+                  onClick={handleStop}
+                >
+                  Stop
+                </Button>
+              </Grid.Column>
+              <Grid.Column width="2">
+                <Button
+                  color="grey"
+                  size="huge"
+                  inverted
+                  circular
+                  fluid
+                  labelPosition=""
+                  disabled={
+                    timerState === 'stopped' && sessionCounter === 1
+                  }
+                  onClick={handleSkip}
+                >
+                  Skip
+                </Button>
+              </Grid.Column>
+            </Grid>
+          </Controls>
+        </Timer>
 
-      <Settings
-        workDuration={workDuration}
-        shortBreakDuration={shortBreakDuration}
-        longBreakDuration={longBreakDuration}
-        handleNewSettings={handleSettingsChange}
-      />
+        <Settings
+          workDuration={workDuration}
+          shortBreakDuration={shortBreakDuration}
+          longBreakDuration={longBreakDuration}
+          handleNewSettings={handleSettingsChange}
+        />
+      </Container>
     </>
   );
 };

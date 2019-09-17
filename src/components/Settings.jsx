@@ -7,6 +7,7 @@ import {
   Button,
   Form,
   Input,
+  Icon,
 } from 'semantic-ui-react';
 
 const SettingsInput = styled.input`
@@ -17,6 +18,18 @@ const SettingsInput = styled.input`
 
 const Label = styled.label`
   color: white !important;
+`;
+
+const SettingsButton = styled.div`
+  position: absolute;
+  margin: 30px !important;
+  font-size: 40px;
+  top: 0;
+  right: 0;
+  @media only screen and (max-width: 400px) {
+    font-size: 35px;
+    margin: 20px;
+  }
 `;
 
 /**
@@ -36,7 +49,11 @@ const Settings = ({
 
   return (
     <Modal
-      trigger={<Button primary>Settings</Button>}
+      trigger={
+        <SettingsButton>
+          <Icon color="grey" name="settings" />
+        </SettingsButton>
+      }
       size="small"
       basic
     >

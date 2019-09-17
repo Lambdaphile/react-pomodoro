@@ -7,7 +7,6 @@ const granimInstance = new Granim({
   image: {
     source: '../../dist/89df56b92a3362639193d54da77e8d69.jpg',
     blendingMode: 'multiply',
-    stretchMode: ['stretch-if-bigger', 'stretch-if-bigger'],
   },
   states: {
     'default-state': {

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './utils/granim.css';
 
-import '../public/granim-background-2.jpg';
+import '../public/granim-background.jpg';
 import './utils/granim';
 import App from './components/App';
 
