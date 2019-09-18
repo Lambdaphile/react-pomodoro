@@ -62,6 +62,10 @@ const getButtonText = timerState => {
   return 'Start';
 };
 
+const isTimerInactive = (timerState, sessionCount) => {
+  return timerState === 'stopped' && sessionCount === 1;
+};
+
 const App = () => {
   // Default settings...
   if (
@@ -187,9 +191,10 @@ const App = () => {
                   inverted
                   circular
                   fluid
-                  disabled={
-                    timerState === 'stopped' && sessionCounter === 1
-                  }
+                  disabled={isTimerInactive(
+                    timerState,
+                    sessionCounter,
+                  )}
                   onClick={handleStop}
                 >
                   Stop
@@ -203,9 +208,10 @@ const App = () => {
                   circular
                   fluid
                   labelPosition=""
-                  disabled={
-                    timerState === 'stopped' && sessionCounter === 1
-                  }
+                  disabled={isTimerInactive(
+                    timerState,
+                    sessionCounter,
+                  )}
                   onClick={handleSkip}
                 >
                   Skip
