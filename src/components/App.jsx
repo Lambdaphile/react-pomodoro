@@ -9,31 +9,24 @@ import Settings from './Settings';
 
 const Timer = styled.section`
   color: white;
-  margin: 0;
 `;
 
 const Display = styled.div`
-  /* SMARTPHONES PORTRAIT */
-  @media only screen and (min-width: 300px) {
-    font-size: 80px;
-  }
-
-  /* SMARTPHONES LANDSCAPE */
+  font-size: 80px;
+  height: 400px;
+  padding-top: 220px;
   @media only screen and (min-width: 480px) {
     font-size: 100px;
   }
-
-  /* TABLETS PORTRAIT */
   @media only screen and (min-width: 768px) {
+    font-size: 120px;
+  }
+  @media only screen and (min-width: 992px) {
     font-size: 150px;
   }
-
-  /* TABLET LANDSCAPE / DESKTOP */
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1200px) {
     font-size: 200px;
   }
-  height: 400px;
-  padding-top: 200px;
 `;
 
 const Controls = styled.div``;
@@ -167,13 +160,13 @@ const App = () => {
           <Display>{timeLeft}</Display>
           <Controls>
             <Grid centered stackable>
-              <Grid.Column width="2">
+              <Grid.Column width="3">
                 <Button
-                  color="grey"
-                  size="huge"
-                  inverted
                   circular
+                  color="grey"
                   fluid
+                  inverted
+                  size="huge"
                   onClick={
                     timerState === 'stopped' ||
                     timerState === 'paused'
@@ -184,34 +177,33 @@ const App = () => {
                   {buttonText}
                 </Button>
               </Grid.Column>
-              <Grid.Column width="2">
+              <Grid.Column width="3">
                 <Button
-                  color="grey"
-                  size="huge"
-                  inverted
                   circular
-                  fluid
+                  color="grey"
                   disabled={isTimerInactive(
                     timerState,
                     sessionCounter,
                   )}
+                  fluid
+                  inverted
+                  size="huge"
                   onClick={handleStop}
                 >
                   Stop
                 </Button>
               </Grid.Column>
-              <Grid.Column width="2">
+              <Grid.Column width="3">
                 <Button
-                  color="grey"
-                  size="huge"
-                  inverted
                   circular
-                  fluid
-                  labelPosition=""
+                  color="grey"
                   disabled={isTimerInactive(
                     timerState,
                     sessionCounter,
                   )}
+                  fluid
+                  inverted
+                  size="huge"
                   onClick={handleSkip}
                 >
                   Skip
@@ -222,9 +214,9 @@ const App = () => {
         </Timer>
 
         <Settings
-          workDuration={workDuration}
-          shortBreakDuration={shortBreakDuration}
           longBreakDuration={longBreakDuration}
+          shortBreakDuration={shortBreakDuration}
+          workDuration={workDuration}
           handleNewSettings={handleSettingsChange}
         />
       </Container>
