@@ -11,24 +11,28 @@ import {
 } from 'semantic-ui-react';
 
 const SettingsInput = styled.input`
-  display: inline-block !important;
+  display: inline-block;
   width: 200px !important;
   margin-right: 10px !important;
 `;
 
 const Label = styled.label`
-  color: white !important;
+  color: white;
 `;
 
 const SettingsButton = styled.div`
+  color: grey;
+  font-size: 35px;
+  margin: 20px;
   position: absolute;
-  margin: 30px !important;
-  font-size: 40px;
-  top: 0;
   right: 0;
-  @media only screen and (max-width: 400px) {
-    font-size: 35px;
-    margin: 20px;
+  top: 0;
+  &:hover {
+    color: white;
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 40px;
+    margin: 30px;
   }
 `;
 
@@ -49,13 +53,13 @@ const Settings = ({
 
   return (
     <Modal
-      trigger={
+      trigger={(
         <SettingsButton>
-          <Icon color="grey" name="settings" />
+          <Icon name="settings" />
         </SettingsButton>
-      }
-      size="small"
+      )}
       basic
+      size="small"
     >
       <Header>
         <p>Enter Your Pomodoro Settings:</p>
@@ -64,25 +68,25 @@ const Settings = ({
         <Form onSubmit={handleFormSubmit}>
           <Form.Field>
             <SettingsInput
+              defaultValue={workDuration}
               id="work-duration"
               name="workDuration"
-              defaultValue={workDuration}
-              type="number"
               placeholder="e.g 25 minutes..."
+              type="number"
             />
             <SettingsInput
+              defaultValue={shortBreakDuration}
               id="short-break"
               name="shortBreakDuration"
-              defaultValue={shortBreakDuration}
-              type="number"
               placeholder="e.g 5 minutes.."
+              type="number"
             />
             <SettingsInput
+              defaultValue={longBreakDuration}
               id="long-break"
               name="longBreakDuration"
-              defaultValue={longBreakDuration}
-              type="number"
               placeholder="e.g. 20 minutes..."
+              type="number"
             />
           </Form.Field>
           <Form.Field>
@@ -90,11 +94,11 @@ const Settings = ({
               Sessions
               <Input
                 id="session-count"
-                name="totalSessionNumber"
-                type="range"
-                min="0"
                 max="12"
+                min="0"
+                name="totalSessionNumber"
                 step="0"
+                type="range"
               />
             </Label>
           </Form.Field>
