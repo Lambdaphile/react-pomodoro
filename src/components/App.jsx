@@ -187,6 +187,9 @@ const App = () => {
                   inverted
                   circular
                   fluid
+                  disabled={
+                    timerState === 'stopped' && sessionCounter === 1
+                  }
                   onClick={handleStop}
                 >
                   Stop
