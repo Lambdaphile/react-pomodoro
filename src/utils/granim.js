@@ -5,8 +5,9 @@ const granimInstance = new Granim({
   direction: 'top-bottom',
   isPausedWhenNotInView: true,
   image: {
-    source: '../../dist/89df56b92a3362639193d54da77e8d69.jpg',
     blendingMode: 'multiply',
+    source: '../../dist/89df56b92a3362639193d54da77e8d69.jpg',
+    stretchMode: ['stretch-if-smaller', 'stretch-if-smaller'],
   },
   states: {
     'default-state': {
