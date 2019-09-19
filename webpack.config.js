@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -47,5 +49,12 @@ module.exports = {
       'react-dom': '@hot-loader/react-dom',
     },
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({ template: path.join(__dirname, 'public/index.html') }),
+    new CleanWebpackPlugin(),
+  ],
+  performance: {
+    hints: false,
+  },
 };
