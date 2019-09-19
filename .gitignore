@@ -3,3 +3,4 @@ node_modules/
 .vscode/
 
 .todo
+.DS_Store
