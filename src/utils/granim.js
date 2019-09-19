@@ -1,4 +1,5 @@
 import Granim from 'granim';
+import granimBackground from '../../public/granim-background.jpg';
 
 const granimInstance = new Granim({
   element: '#canvas-basic',
@@ -6,7 +7,7 @@ const granimInstance = new Granim({
   isPausedWhenNotInView: true,
   image: {
     blendingMode: 'multiply',
-    source: '../../dist/89df56b92a3362639193d54da77e8d69.jpg',
+    source: granimBackground,
     stretchMode: ['stretch-if-smaller', 'stretch-if-smaller'],
   },
   states: {
