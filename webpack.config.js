@@ -51,7 +51,9 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({ template: path.join(__dirname, 'public/index.html') }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'public/index.html'),
+    }),
     new CleanWebpackPlugin(),
   ],
   performance: {
