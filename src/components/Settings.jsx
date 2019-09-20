@@ -19,7 +19,11 @@ const Label = styled.label`
 const FormActions = styled.div`
   float: right;
   margin-top: 30px;
+  margin-right: 15px;
   width: 180px;
+  @media only screen and (min-width: 768px) {
+    margin-right: 0;
+  }
 `;
 
 const SettingsButton = styled.div`
@@ -77,7 +81,7 @@ const Settings = ({
       <Modal.Content>
         <Form onSubmit={handleFormSubmit}>
           <Form.Field>
-            <Grid centered stackable>
+            <Grid stackable>
               <Grid.Row>
                 <Grid.Column floated="left" fluid width="5">
                   <Label>Work Duration:</Label>
