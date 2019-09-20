@@ -166,13 +166,13 @@ const App = () => {
                   color="grey"
                   fluid
                   inverted
-                  size="huge"
                   onClick={
                     timerState === 'stopped' ||
                     timerState === 'paused'
                       ? () => setTimerState('running')
                       : () => setTimerState('paused')
                   }
+                  size="huge"
                 >
                   {buttonText}
                 </Button>
@@ -187,8 +187,8 @@ const App = () => {
                   )}
                   fluid
                   inverted
-                  size="huge"
                   onClick={handleStop}
+                  size="huge"
                 >
                   Stop
                 </Button>
@@ -203,8 +203,8 @@ const App = () => {
                   )}
                   fluid
                   inverted
-                  size="huge"
                   onClick={handleSkip}
+                  size="huge"
                 >
                   Skip
                 </Button>
@@ -217,6 +217,7 @@ const App = () => {
           longBreakDuration={longBreakDuration}
           shortBreakDuration={shortBreakDuration}
           workDuration={workDuration}
+          totalSessionNumber={totalSessionNumber}
           handleNewSettings={handleSettingsChange}
         />
       </Container>

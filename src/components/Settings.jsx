@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styled from 'styled-components';
 import {
   Modal,
@@ -8,16 +9,17 @@ import {
   Form,
   Input,
   Icon,
+  Grid,
 } from 'semantic-ui-react';
-
-const SettingsInput = styled.input`
-  display: inline-block;
-  width: 200px !important;
-  margin-right: 10px !important;
-`;
 
 const Label = styled.label`
   color: white;
+`;
+
+const FormActions = styled.div`
+  float: right;
+  margin-top: 30px;
+  width: 180px;
 `;
 
 const SettingsButton = styled.div`
@@ -36,15 +38,23 @@ const SettingsButton = styled.div`
   }
 `;
 
+const RangeInput = styled.input`
+  width: 100%;
+  &:hover {
+    color: red;
+  }
+`;
+
 /**
  * Work, short break, long break duration and
  * session count
  */
 const Settings = ({
-  workDuration,
-  shortBreakDuration,
-  longBreakDuration,
   handleNewSettings,
+  longBreakDuration,
+  shortBreakDuration,
+  totalSessionNumber,
+  workDuration,
 }) => {
   const handleFormSubmit = e => {
     const newSettings = new FormData(e.target);
@@ -53,56 +63,84 @@ const Settings = ({
 
   return (
     <Modal
-      trigger={(
+      basic
+      trigger={
         <SettingsButton>
           <Icon name="settings" />
         </SettingsButton>
-      )}
-      basic
+      }
       size="small"
     >
       <Header>
-        <p>Enter Your Pomodoro Settings:</p>
+        <p>Custom Pomodoro Settings:</p>
       </Header>
       <Modal.Content>
         <Form onSubmit={handleFormSubmit}>
           <Form.Field>
-            <SettingsInput
-              defaultValue={workDuration}
-              id="work-duration"
-              name="workDuration"
-              placeholder="e.g 25 minutes..."
-              type="number"
-            />
-            <SettingsInput
-              defaultValue={shortBreakDuration}
-              id="short-break"
-              name="shortBreakDuration"
-              placeholder="e.g 5 minutes.."
-              type="number"
-            />
-            <SettingsInput
-              defaultValue={longBreakDuration}
-              id="long-break"
-              name="longBreakDuration"
-              placeholder="e.g. 20 minutes..."
-              type="number"
-            />
+            <Grid centered stackable>
+              <Grid.Row>
+                <Grid.Column floated="left" fluid width="5">
+                  <Label>Work Duration:</Label>
+                  <Input
+                    defaultValue={workDuration}
+                    fluid
+                    id="work-duration"
+                    name="workDuration"
+                    placeholder="25"
+                    size="small"
+                    type="number"
+                  />
+                </Grid.Column>
+                <Grid.Column fluid width="5">
+                  <Label>Short Break Duration:</Label>
+                  <Input
+                    defaultValue={shortBreakDuration}
+                    fluid
+                    id="short-break"
+                    name="shortBreakDuration"
+                    placeholder="5"
+                    size="small"
+                    type="number"
+                  />
+                </Grid.Column>
+                <Grid.Column floated="right" fluid width="5">
+                  <Label>Long Break Duration:</Label>
+                  <Input
+                    defaultValue={longBreakDuration}
+                    id="long-break"
+                    name="longBreakDuration"
+                    placeholder="20"
+                    size="small"
+                    type="number"
+                  />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column width="16">
+                  <Label>
+                    Sessions
+                    <RangeInput
+                      defaultValue={totalSessionNumber}
+                      id="session-count"
+                      max="12"
+                      min="0"
+                      name="totalSessionNumber"
+                      step="1"
+                      type="range"
+                    />
+                  </Label>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Form.Field>
-          <Form.Field>
-            <Label>
-              Sessions
-              <Input
-                id="session-count"
-                max="12"
-                min="0"
-                name="totalSessionNumber"
-                step="0"
-                type="range"
-              />
-            </Label>
-          </Form.Field>
-          <Button type="submit">Submit</Button>
+          <FormActions>
+            <Button color="green" type="submit">
+              Submit
+            </Button>
+            <Button floated="right" color="red" type="submit">
+              Cancel
+            </Button>
+          </FormActions>
         </Form>
       </Modal.Content>
     </Modal>
