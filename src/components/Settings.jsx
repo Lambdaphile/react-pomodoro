@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
@@ -19,7 +19,7 @@ const FormActions = styled.div`
   float: right;
   margin-top: 30px;
   margin-right: 15px;
-  width: 180px;
+  width: 200px;
   @media only screen and (min-width: 768px) {
     margin-right: 0;
   }
@@ -55,6 +55,11 @@ const Settings = ({
   shortBreak,
   pomodoro,
 }) => {
+  const [modalState, setModalState] = useState(false);
+
+  const handleOpen = () => setModalState(true);
+  const handleClose = () => setModalState(false);
+
   const handleFormSubmit = e => {
     const newSettings = new FormData(e.target);
     onSettingsChange(newSettings);
@@ -63,9 +68,10 @@ const Settings = ({
   return (
     <Modal
       basic
+      open={modalState}
       trigger={(
         <SettingsButton>
-          <Icon name="settings" />
+          <Icon name="settings" onClick={handleOpen} />
         </SettingsButton>
       )}
       size="small"
@@ -130,12 +136,23 @@ const Settings = ({
             </Grid>
           </Form.Field>
           <FormActions>
-            <Button color="green" type="submit">
-              Submit
-            </Button>
-            <Button color="red" floated="right" type="submit">
-              Cancel
-            </Button>
+            <Modal.Actions>
+              <Button
+                color="green"
+                onClick={handleClose}
+                type="submit"
+              >
+                Submit
+              </Button>
+              <Button
+                color="red"
+                floated="right"
+                onClick={handleClose}
+                type="submit"
+              >
+                Cancel
+              </Button>
+            </Modal.Actions>
           </FormActions>
         </Form>
       </Modal.Content>
