@@ -78,7 +78,7 @@ const Settings = ({
           <Form.Field>
             <Grid stackable>
               <Grid.Row>
-                <Grid.Column floated="left" fluid width="5">
+                <Grid.Column floated="left" width="5">
                   <Label>Pomodoro duration:</Label>
                   <Input
                     defaultValue={pomodoro}
@@ -89,7 +89,7 @@ const Settings = ({
                     type="number"
                   />
                 </Grid.Column>
-                <Grid.Column fluid width="5">
+                <Grid.Column width="5">
                   <Label>Short short break duration:</Label>
                   <Input
                     defaultValue={shortBreak}
@@ -100,10 +100,11 @@ const Settings = ({
                     type="number"
                   />
                 </Grid.Column>
-                <Grid.Column floated="right" fluid width="5">
+                <Grid.Column floated="right" width="5">
                   <Label>Long break duration:</Label>
                   <Input
                     defaultValue={longBreak}
+                    fluid
                     name="longBreakDuration"
                     placeholder="20"
                     size="small"
