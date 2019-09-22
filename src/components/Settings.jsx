@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
 import {
-  Modal,
-  Header,
   Button,
   Form,
-  Input,
-  Icon,
   Grid,
+  Header,
+  Icon,
+  Input,
+  Modal,
 } from 'semantic-ui-react';
 
 const Label = styled.label`
@@ -23,6 +22,13 @@ const FormActions = styled.div`
   width: 180px;
   @media only screen and (min-width: 768px) {
     margin-right: 0;
+  }
+`;
+
+const RangeInput = styled.input`
+  width: 100%;
+  &:hover {
+    color: red;
   }
 `;
 
@@ -42,37 +48,26 @@ const SettingsButton = styled.div`
   }
 `;
 
-const RangeInput = styled.input`
-  width: 100%;
-  &:hover {
-    color: red;
-  }
-`;
-
-/**
- * Work, short break, long break duration and
- * session count
- */
 const Settings = ({
-  handleNewSettings,
-  longBreakDuration,
-  shortBreakDuration,
-  totalSessionNumber,
-  workDuration,
+  onSettingsChange,
+  longBreak,
+  longBreakDelay,
+  shortBreak,
+  pomodoro,
 }) => {
   const handleFormSubmit = e => {
     const newSettings = new FormData(e.target);
-    handleNewSettings(newSettings);
+    onSettingsChange(newSettings);
   };
 
   return (
     <Modal
       basic
-      trigger={
+      trigger={(
         <SettingsButton>
           <Icon name="settings" />
         </SettingsButton>
-      }
+      )}
       size="small"
     >
       <Header>
@@ -84,23 +79,21 @@ const Settings = ({
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column floated="left" fluid width="5">
-                  <Label>Work Duration:</Label>
+                  <Label>Pomodoro duration:</Label>
                   <Input
-                    defaultValue={workDuration}
+                    defaultValue={pomodoro}
                     fluid
-                    id="work-duration"
-                    name="workDuration"
+                    name="pomodoroDuration"
                     placeholder="25"
                     size="small"
                     type="number"
                   />
                 </Grid.Column>
                 <Grid.Column fluid width="5">
-                  <Label>Short Break Duration:</Label>
+                  <Label>Short short break duration:</Label>
                   <Input
-                    defaultValue={shortBreakDuration}
+                    defaultValue={shortBreak}
                     fluid
-                    id="short-break"
                     name="shortBreakDuration"
                     placeholder="5"
                     size="small"
@@ -108,10 +101,9 @@ const Settings = ({
                   />
                 </Grid.Column>
                 <Grid.Column floated="right" fluid width="5">
-                  <Label>Long Break Duration:</Label>
+                  <Label>Long break duration:</Label>
                   <Input
-                    defaultValue={longBreakDuration}
-                    id="long-break"
+                    defaultValue={longBreak}
                     name="longBreakDuration"
                     placeholder="20"
                     size="small"
@@ -122,13 +114,12 @@ const Settings = ({
               <Grid.Row>
                 <Grid.Column width="16">
                   <Label>
-                    Sessions
+                    Long break delay:
                     <RangeInput
-                      defaultValue={totalSessionNumber}
-                      id="session-count"
+                      defaultValue={longBreakDelay}
+                      name="longBreakDelay"
                       max="12"
                       min="0"
-                      name="totalSessionNumber"
                       step="1"
                       type="range"
                     />
@@ -141,7 +132,7 @@ const Settings = ({
             <Button color="green" type="submit">
               Submit
             </Button>
-            <Button floated="right" color="red" type="submit">
+            <Button color="red" floated="right" type="submit">
               Cancel
             </Button>
           </FormActions>
@@ -152,10 +143,11 @@ const Settings = ({
 };
 
 Settings.propTypes = {
-  workDuration: PropTypes.number.isRequired,
-  shortBreakDuration: PropTypes.number.isRequired,
-  longBreakDuration: PropTypes.number.isRequired,
-  handleNewSettings: PropTypes.func.isRequired,
+  onSettingsChange: PropTypes.func.isRequired,
+  longBreak: PropTypes.number.isRequired,
+  longBreakDelay: PropTypes.number.isRequired,
+  pomodoro: PropTypes.number.isRequired,
+  shortBreak: PropTypes.number.isRequired,
 };
 
 export default Settings;
