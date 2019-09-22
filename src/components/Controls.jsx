@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Grid } from 'semantic-ui-react';
+import { Button, Grid, Header, Icon, Modal } from 'semantic-ui-react';
 
 const Controls = ({
   isDisabled,
@@ -9,6 +9,18 @@ const Controls = ({
   onStop,
   textContext,
 }) => {
+  const [modalState, setModalState] = useState(false);
+
+  const handleOpen = () => {
+    setModalState(true);
+  };
+
+  const handleYes = () => {
+    onStop();
+    setModalState(false);
+  };
+  const handleNo = () => setModalState(false);
+
   return (
     <>
       <Grid centered stackable>
@@ -25,17 +37,39 @@ const Controls = ({
           </Button>
         </Grid.Column>
         <Grid.Column width="3">
-          <Button
-            circular
-            color="grey"
-            disabled={isDisabled}
-            fluid
-            inverted
-            onClick={onStop}
-            size="huge"
+          <Modal
+            basic
+            open={modalState}
+            size="small"
+            trigger={(
+              <Button
+                circular
+                color="grey"
+                disabled={isDisabled}
+                fluid
+                inverted
+                onClick={handleOpen}
+                size="huge"
+              >
+                Stop
+              </Button>
+            )}
           >
-            Stop
-          </Button>
+            <Header content="Stop Pomodoro" />
+            <Modal.Content>
+              <p>Are you sure you want to reset Pomodoro?</p>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button basic color="red" inverted onClick={handleNo}>
+                <Icon name="remove" />
+                No
+              </Button>
+              <Button color="green" inverted onClick={handleYes}>
+                <Icon name="checkmark" />
+                Yes
+              </Button>
+            </Modal.Actions>
+          </Modal>
         </Grid.Column>
         <Grid.Column width="3">
           <Button

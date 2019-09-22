@@ -94,11 +94,9 @@ const App = () => {
   const [sessionCounter, setSessionCounter] = useState(1);
 
   const handleStop = () => {
-    if (confirm('Are you sure you want to reset Pomodoro?')) {
-      setSeconds(pomodoroDuration);
-      setSessionCounter(1);
-      setTimerState('stopped');
-    }
+    setSeconds(pomodoroDuration);
+    setSessionCounter(1);
+    setTimerState('stopped');
   };
 
   /**
