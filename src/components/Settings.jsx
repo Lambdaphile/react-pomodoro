@@ -81,7 +81,7 @@ const Settings = ({
                 <Grid.Column floated="left" width="5">
                   <Label>Pomodoro duration:</Label>
                   <Input
-                    defaultValue={pomodoro}
+                    defaultValue={pomodoro / 60}
                     fluid
                     name="pomodoroDuration"
                     placeholder="25"
@@ -92,7 +92,7 @@ const Settings = ({
                 <Grid.Column width="5">
                   <Label>Short short break duration:</Label>
                   <Input
-                    defaultValue={shortBreak}
+                    defaultValue={shortBreak / 60}
                     fluid
                     name="shortBreakDuration"
                     placeholder="5"
@@ -103,7 +103,7 @@ const Settings = ({
                 <Grid.Column floated="right" width="5">
                   <Label>Long break duration:</Label>
                   <Input
-                    defaultValue={longBreak}
+                    defaultValue={longBreak / 60}
                     fluid
                     name="longBreakDuration"
                     placeholder="20"
@@ -117,7 +117,7 @@ const Settings = ({
                   <Label>
                     Long break delay:
                     <RangeInput
-                      defaultValue={longBreakDelay}
+                      defaultValue={longBreakDelay / 2}
                       name="longBreakDelay"
                       max="12"
                       min="0"

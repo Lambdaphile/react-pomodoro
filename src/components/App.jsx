@@ -1,8 +1,11 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useState } from 'react';
+
 import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
+
 import useInterval from '../hooks/useInterval';
+
 import Controls from './Controls';
 import Settings from './Settings';
 
@@ -133,7 +136,7 @@ const App = () => {
       if (setting[0] === 'longBreakDelay') {
         localStorage.setItem(setting[0], setting[1] * 2);
       } else {
-        localStorage.setItem(setting[0], setting[1]);
+        localStorage.setItem(setting[0], setting[1] * 60);
       }
     });
 
