@@ -7,6 +7,7 @@ import { Container } from 'semantic-ui-react';
 import useInterval from '../hooks/useInterval';
 
 import Controls from './Controls';
+import Pomodoro from './Pomodoro';
 import Settings from './Settings';
 
 const Display = styled.div`
@@ -168,7 +169,11 @@ const App = () => {
             textContext={firstButtonText}
           />
         </Timer>
-
+        <Pomodoro
+          longBreakDelay={longBreakDelay}
+          sessionCounter={sessionCounter}
+          timerState={timerState}
+        />
         <Settings
           onSettingsChange={handleSettingsChange}
           longBreakDelay={longBreakDelay}
