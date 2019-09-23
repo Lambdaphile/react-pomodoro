@@ -81,7 +81,7 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
 Pomodoro.propTypes = {
   longBreakDelay: PropTypes.number.isRequired,
   sessionCounter: PropTypes.number.isRequired,
-  timerState: PropTypes.number.isRequired,
+  timerState: PropTypes.string.isRequired,
 };
 
 export default Pomodoro;
