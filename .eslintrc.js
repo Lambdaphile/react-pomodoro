@@ -5,10 +5,11 @@ module.exports = {
     es6: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
     'airbnb',
     'prettier',
+    'prettier/react',
+    'prettier/standard',
+    'plugin:prettier/recommended',
   ],
   globals: {
     Atomics: 'readonly',
