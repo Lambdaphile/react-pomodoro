@@ -32,7 +32,7 @@ const Timer = styled.section`
   color: white;
 `;
 
-const getTimeInMMSS = seconds => {
+const getTimeInMMSS = (seconds) => {
   const minutesLeft = Math.floor(seconds / 60);
   const secondsLeft = Math.floor(seconds - minutesLeft * 60);
 
@@ -130,8 +130,8 @@ const App = () => {
     timerState,
   );
 
-  const handleSettingsChange = settings => {
-    Array.from(settings).forEach(setting => {
+  const handleSettingsChange = (settings) => {
+    Array.from(settings).forEach((setting) => {
       if (setting[0] === 'longBreakDelay') {
         localStorage.setItem(setting[0], setting[1] * 2);
       } else {

@@ -41,7 +41,7 @@ const Controls = ({
             basic
             open={modalState}
             size="small"
-            trigger={(
+            trigger={
               <Button
                 circular
                 color="grey"
@@ -53,7 +53,7 @@ const Controls = ({
               >
                 Stop
               </Button>
-            )}
+            }
           >
             <Header content="Stop Pomodoro" />
             <Modal.Content>

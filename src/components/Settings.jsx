@@ -60,7 +60,7 @@ const Settings = ({
   const handleOpen = () => setModalState(true);
   const handleClose = () => setModalState(false);
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = (e) => {
     const newSettings = new FormData(e.target);
     onSettingsChange(newSettings);
   };
@@ -69,11 +69,11 @@ const Settings = ({
     <Modal
       basic
       open={modalState}
-      trigger={(
+      trigger={
         <SettingsButton>
           <Icon name="settings" onClick={handleOpen} />
         </SettingsButton>
-      )}
+      }
       size="small"
     >
       <Header>
