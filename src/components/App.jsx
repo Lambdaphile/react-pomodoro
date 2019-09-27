@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
@@ -39,13 +39,13 @@ const getTimeInMMSS = (seconds) => {
 	/**
 	 * Converts to MM:SS format...
 	 */
-	let timeLeft = `${minutesLeft} : ${secondsLeft}`;
+	let timeLeft = `${minutesLeft}:${secondsLeft}`;
 	if (minutesLeft < 10 && secondsLeft < 10) {
-		timeLeft = `0${minutesLeft} : 0${secondsLeft}`;
+		timeLeft = `0${minutesLeft}:0${secondsLeft}`;
 	} else if (minutesLeft < 10) {
-		timeLeft = `0${minutesLeft} : ${secondsLeft}`;
+		timeLeft = `0${minutesLeft}:${secondsLeft}`;
 	} else if (secondsLeft < 10) {
-		timeLeft = `${minutesLeft} : 0${secondsLeft}`;
+		timeLeft = `${minutesLeft}:0${secondsLeft}`;
 	}
 
 	return timeLeft;
@@ -90,6 +90,13 @@ const App = () => {
 	const [seconds, setSeconds] = useState(pomodoroDuration);
 	const [timerState, setTimerState] = useState('stopped');
 	const [sessionCounter, setSessionCounter] = useState(1);
+
+	useEffect(() => {
+		document.title =
+			sessionCounter % 2 !== 0
+				? `Work: ${getTimeInMMSS(seconds)}`
+				: `Break: ${getTimeInMMSS(seconds)}`;
+	}, [seconds, sessionCounter]);
 
 	const handleStop = () => {
 		setSeconds(pomodoroDuration);
