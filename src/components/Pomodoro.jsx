@@ -21,19 +21,10 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
 				pomodoro.push(
 					<Icon.Group>
 						<Icon
-							name="circle notch"
+							name="smile"
 							style={{
 								color: '#629d62',
-								fontSize: '36px',
-							}}
-						/>
-						<Icon
-							name="circle dot outline"
-							style={{
-								color: '#629d62',
-								fontSize: '18px',
-								left: '46.5%',
-								top: '46%',
+								fontSize: '34px',
 							}}
 						/>
 					</Icon.Group>,
@@ -44,19 +35,10 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
 					<Icon.Group>
 						<Icon
 							loading
-							name="circle notch"
+							name="smile"
 							style={{
 								color: '#baba45',
-								fontSize: '36px',
-							}}
-						/>
-						<Icon
-							name="circle dot outline"
-							style={{
-								color: '#baba45',
-								fontSize: '18px',
-								left: '46.5%',
-								top: '46%',
+								fontSize: '34px',
 							}}
 						/>
 					</Icon.Group>,
@@ -66,18 +48,9 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
 				pomodoro.push(
 					<Icon.Group>
 						<Icon
-							name="circle notch"
+							name="meh"
 							style={{
-								fontSize: '36px',
-							}}
-						/>
-						<Icon
-							name="circle dot outline"
-							style={{
-								fontSize: '18px',
-								left: '46.5%',
-								top: '46%',
-								borderRadius: '100%',
+								fontSize: '34px',
 							}}
 						/>
 					</Icon.Group>,
