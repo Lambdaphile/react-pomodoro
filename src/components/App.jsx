@@ -116,6 +116,16 @@ const App = () => {
 		}
 
 		setSessionCounter(sessionCounter + 1);
+
+		const AudioContext1 = window.AudioContext || window.webkitAudioContext;
+		const audioCtx = new AudioContext1();
+
+		const audioElement = document.querySelector('audio');
+		const track = audioCtx.createMediaElementSource(audioElement);
+
+		audioElement.play();
+		// if track is playing pause it
+		track.connect(audioCtx.destination);
 	};
 
 	useInterval(
