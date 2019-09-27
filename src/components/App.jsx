@@ -94,8 +94,8 @@ const App = () => {
 	useEffect(() => {
 		document.title =
 			sessionCounter % 2 !== 0
-				? `Work: ${getTimeInMMSS(seconds)}`
-				: `Break: ${getTimeInMMSS(seconds)}`;
+				? `${getTimeInMMSS(seconds)} - Work`
+				: `${getTimeInMMSS(seconds)} - Break`;
 	}, [seconds, sessionCounter]);
 
 	const handleStop = () => {
