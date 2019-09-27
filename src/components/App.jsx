@@ -117,15 +117,17 @@ const App = () => {
 
 		setSessionCounter(sessionCounter + 1);
 
-		const AudioContext1 = window.AudioContext || window.webkitAudioContext;
-		const audioCtx = new AudioContext1();
-
+		/**
+		 * Play sound alert when session is over or skipped
+		 */
 		const audioElement = document.querySelector('audio');
-		const track = audioCtx.createMediaElementSource(audioElement);
-
+		if (sessionCounter === 1) {
+			const AudioContext = window.AudioContext || window.webkitAudioContext;
+			const audioCtx = new AudioContext();
+			const track = audioCtx.createMediaElementSource(audioElement);
+			track.connect(audioCtx.destination);
+		}
 		audioElement.play();
-		// if track is playing pause it
-		track.connect(audioCtx.destination);
 	};
 
 	useInterval(
