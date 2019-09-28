@@ -51,6 +51,24 @@ const getTimeInMMSS = (seconds) => {
   return timeLeft;
 };
 
+const notify = (sessionCounter) => {
+  let notification;
+  if (!('Notification' in window)) {
+    alert('This browser does not support desktop notifications!');
+  } else if (Notification.permission === 'granted') {
+    notification =
+      sessionCounter % 2 !== 0
+        ? new Notification("It's Break Time", {
+            body: 'Take a short break... :)',
+          })
+        : new Notification("It's Work Time!", {
+            body: 'Time to get back work... :)',
+          });
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission();
+  }
+};
+
 const App = () => {
   /**
    * Checks for previously set settings, if not available -
@@ -135,6 +153,9 @@ const App = () => {
       track.connect(audioCtx.destination);
     }
     audioElement.play();
+
+    // Browser notification when session is over...
+    notify(sessionCounter);
   };
 
   useInterval(
