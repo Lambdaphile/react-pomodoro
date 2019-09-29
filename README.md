@@ -1,5 +1,5 @@
 # React Pomodoro App [[`preview`]](https://genesis-algorithms.github.io/react-pomodoro/)
-> This project was born while I was trying to learn React Hooks, Webpack and Styled Components
+> This project was born while I was trying to learn React Hooks, Webpack and Styled Components...
 
 ### Project's core tools:
 * [React Hooks](https://reactjs.org/docs/hooks-intro.html)
@@ -17,3 +17,5 @@
 * [React and Webpack initial configuration](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658)
 * [Make setInterval work with React Hooks](https://overreacted.io/making-setinterval-declarative-with-react-hooks/)
 * [Deploying React App into github pages](https://reactgo.com/deploy-react-app-github-pages/)
+
+> `Initial slow load issue is going to be fixed until tommorow...`
