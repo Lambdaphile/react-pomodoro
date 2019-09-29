@@ -21,7 +21,7 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
         pomodoro.push(
           <Icon.Group>
             <Icon
-              name="smile"
+              name="circle notch"
               style={{
                 color: '#629d62',
                 fontSize: '34px',
@@ -35,7 +35,7 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
           <Icon.Group>
             <Icon
               loading
-              name="smile"
+              name="circle notch"
               style={{
                 color: '#baba45',
                 fontSize: '34px',
@@ -48,7 +48,7 @@ const Pomodoro = ({ longBreakDelay, sessionCounter, timerState }) => {
         pomodoro.push(
           <Icon.Group>
             <Icon
-              name="meh"
+              name="circle notch"
               style={{
                 fontSize: '34px',
               }}
