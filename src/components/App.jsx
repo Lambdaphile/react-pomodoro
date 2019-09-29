@@ -29,7 +29,7 @@ const Display = styled.div`
 `;
 
 const Timer = styled.section`
-  color: white;
+  color: ghostwhite;
 `;
 
 const getTimeInMMSS = (seconds) => {
